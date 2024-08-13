@@ -1,0 +1,16 @@
+name: Bluemetrix
+
+entries:
+  - title: Bluemetrix SecureToken
+    label: tokenization
+    short_description: Run Bluemetrix SecureToken demo
+    long_description: >-
+      This project show an example of how to use Bluemetrix SecureToken using CML
+    tags:
+      - Tokenization
+      - Data Security
+      - Data Compliance
+    git_url: "git@gitlab.com:leonardo.dias2/cml_tokenization_amp.git"
+    image_path: >-
+      https://raw.githubusercontent.com/bluemetrix-com/securetoken-amp/main/image.jpg
+    is_prototype: true
