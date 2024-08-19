@@ -12,5 +12,5 @@ entries:
       - Data Compliance
     git_url: "git@gitlab.com:leonardo.dias2/cml_tokenization_amp.git"
     image_path: >-
-      https://raw.githubusercontent.com/bluemetrix-com/securetoken-amp/main/image.jpg
+      https://raw.githubusercontent.com/bluemetrix-com/securetoken-amp/main/images/image.jpg
     is_prototype: true
