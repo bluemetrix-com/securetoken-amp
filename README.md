@@ -59,13 +59,14 @@ Follow the steps below to configure the credentials:
 
 **Step 1**: Download the Kubeconfig associated with your ML Workspace from the **Actions** menu
 ![alt text](images/image5.png "Export Kubeconfig")
-**Step 2**: Connect to the kubernetes cluster
 
-<ins>**AWS**</ins>
+**Step 2**: Connect to the kubernetes cluster. Please select the instructions according to your Cloud Provided: [AWS](#insAWSins) or [Azure](#insAzureins)
+
+#### <ins>**AWS**</ins>
 - You need to install
-    - **Kubectl**: [Set up kubectl and eksctl - Amazon EKS](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-    - **Aws-iam-authenticator**: brew install aws-iam-authenticator
-    - **AWS CLI**: [Install or update to the latest version of the AWS CLI - AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+   - **Kubectl**: [Set up kubectl and eksctl - Amazon EKS](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+   - **Aws-iam-authenticator**: brew install aws-iam-authenticator
+   - **AWS CLI**: [Install or update to the latest version of the AWS CLI - AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - Connect your AWS account to the aws-iam-authenticator with your **ACCESS KEY** and **SECRET KEY** then run
 ```
 $ aws configure
@@ -77,33 +78,47 @@ $ aws configure
 $ KUBECONFIG=kube-config.yaml kubectl get pods --all-namespaces
  ```
 
-<ins>**Azure**</ins>
+#### <ins>**Azure**</ins>
 
 1. **Access Configuration**:
-    - Ensure your Azure GroupID (ObjectID) is configured for access to the AKS cluster
-    - [Find your ObjectID and tenant details in the Azure portal](https://learn.microsoft.com/en-us/azure/azure-portal/get-subscription-tenant-id)
-    - Make sure your Azure GroupID (ObjectID in Azure portal) is configured in GRANT ACCESS.
-    - At the time of document preparation, restriction for Azure ID access to AKS cluster is only applicable for CDW.
-    - In order to find ObjectID’s for user, group and tenant etc. on azure portal please follow the link Find tenant ID, domain name, user object ID
-2. **Login to Azure CLI**:
-    - Sign in using Azure CLI by running the command:
+   - [Find your ObjectID and tenant details in the Azure portal](https://learn.microsoft.com/en-us/azure/azure-portal/get-subscription-tenant-id)
+   - At the time of document preparation, restriction for Azure ID access to AKS cluster is only applicable for CDW.
+   - Make sure the user you will be using to login to Azure has permissions to access the AKS cluster
+2. **Install Azure CLI**
+
+   Install Azure CLI using the guide on the link https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+3. **Login to Azure CLI**:
+   - Sign in with Azure CLI. In the example here we are logging-in by providing Azure Tenant ID, however you can choose different ways to login. Different methods of Azure cli login can be found here [Sign in with Azure CLI — Login and Authentication](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli):
    ```
    az login --tenant <Tenant-ID>
    ```
-    - Complete login via the web browser.
-3. Export KUBECONFIG variable and set the path to the kubecofig downloaded
+   The example below shows the expected output from the command above:
+   ```
+   Example:
+   memhra@cloudera  ~  az login
+   The default web browser has been opened at https://login.microsoftonline.com/f636e1c4-XXXX-XXXX-XXX-e247bXXXXXX/oauth2/v2.0/authorize. 
+   Please continue the login in the web browser. If no web browser is available or if the web browser fails to open, use device code flow 
+   with `az login --use-device-code`.
+   ```
+   - This command will automatically open your default browser and ask for the Microsoft Azure Credentials:
+     ![alt text](images/image26.png)
+   - Complete login via the web browser
+
+4. **Export KUBECONFIG variable and set the path to the kubeconfig downloaded:**
 ```
 export KUBECONFIG=<path-to-kubeconfig-file>
 ```
-4. Install KubeLogin:
-    - Install the KubeLogin client (if required) to generate a token for authentication.
-      You may refer to instructions to install it on your terminal here, based on the OS running on your terminal.
+5. **Install KubeLogin**:
+   - Install the **KubeLogin** client (if required) to generate a token for authentication.
 
-5. Authenticate and Use Kubectl:
-    - Run any `kubectl` command (e.g., `kubectl get ns`).
-    - You will be prompted to authenticate via a device code.
-    - Use a web browser to open https://microsoft.com/devicelogin and enter the code shown in the terminal.
-    - After authentication, you can use kubectl commands to manage your AKS cluster.
+     You may refer to instructions to install it on your terminal [here](https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize), based on the OS running on your terminal.
+
+
+6. **Authenticate and Use Kubectl**:
+   - Run any `kubectl` command (e.g.: `kubectl get ns`).
+   - You will be prompted to authenticate via a device code.
+   - Use a web browser to open https://microsoft.com/devicelogin and enter the code shown in the terminal.
+   - After authentication, you can use `kubectl` commands to manage your AKS cluster.
 
 **Step 3** : Execute the following command to create the credentials on your cluster. Use the credentials provided on the previous step.
 ```
