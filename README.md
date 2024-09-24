@@ -85,10 +85,10 @@ $ KUBECONFIG=kube-config.yaml kubectl get pods --all-namespaces
    Go to: **ML Workspace** > **Actions** > **Download Kubeconfig**
    ![alt text](images/image27.png "Export Kubeconfig")
 
-2. **Export KUBECONFIG variable and set the path to the kubeconfig downloaded**:
-   ```
+2. **Export `KUBECONFIG` variable and set the path to the `kubeconfig` downloaded:**
+    ```
     export KUBECONFIG=<path-to-kubeconfig-file>
-   ```
+    ```
 3. **Install Azure CLI**
 
    Install Azure CLI using the guide on the link https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
@@ -110,17 +110,13 @@ $ KUBECONFIG=kube-config.yaml kubectl get pods --all-namespaces
      ![alt text](images/image26.png)
    - Complete login via the web browser
 
-5. **Export `KUBECONFIG` variable and set the path to the `kubeconfig` downloaded:**
-```
-export KUBECONFIG=<path-to-kubeconfig-file>
-```
-6. **Install KubeLogin**:
+5. **Install KubeLogin**:
    - Install the **KubeLogin** client (if required) to generate a token for authentication.
 
      You may refer to instructions to install it on your terminal [here](https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize), based on the OS running on your terminal.
 
 
-7. **Authenticate and Use Kubectl**:
+6. **Authenticate and Use Kubectl**:
    - Run any `kubectl` command (e.g.: `kubectl get ns`).
    - You will be prompted to authenticate via a device code.
    - Use a web browser to open https://microsoft.com/devicelogin and enter the code shown in the terminal.
