@@ -38,15 +38,17 @@ SecureToken is based on a customized ML Runtime Image and its content is stored 
 
 To access the private repository, it is required to fill the [Registration Form](https://dbh7xjc3mu6.typeform.com/to/nMIBRkxM) and provide the ssh-key of your ML workspace.
 
-Steps to do that are given below **Cloudera Machine Learning** > **ML Workspace** > Select **User Settings** from the menu on the left > Select **Outbound SSH*** > Copy the **User Public SSH Key**
+The SSH Public Key for your ML workspace can be collected using the following instructions:
 
-<ins>**Add this key to a text file and attach it to the above email.**</ins>
+Access **Cloudera Machine Learning (CML)** > **ML Workspace** > Select **User Settings** from the menu on the left > Select **Outbound SSH*** > Copy the **User Public SSH Key**
+
+<ins>**Add the copied text for your CML SSH Public key to the respective field available on the Registration Form.**</ins>
 
 Access will be allowed to
 The private Gitlab Docker Registry (to download the ML Runtime)
 The Gitlab Repository (to clone the AMP contents).
 
-NOTE : Ap part of the response you will receive credentials(username and password) to access the docker repository
+**NOTE** : As part of the response you will receive credentials(username and password) to access the docker repository
 
 
 ## Installation
@@ -64,9 +66,9 @@ Follow the steps below to configure the credentials:
 
 #### AWS
 - You need to install
-   - **Kubectl**: [Set up kubectl and eksctl - Amazon EKS](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-   - **Aws-iam-authenticator**: brew install aws-iam-authenticator
-   - **AWS CLI**: [Install or update to the latest version of the AWS CLI - AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+    - **Kubectl**: [Set up kubectl and eksctl - Amazon EKS](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+    - **Aws-iam-authenticator**: brew install aws-iam-authenticator
+    - **AWS CLI**: [Install or update to the latest version of the AWS CLI - AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - Connect your AWS account to the aws-iam-authenticator with your **ACCESS KEY** and **SECRET KEY** then run
 ```
 $ aws configure
@@ -94,7 +96,7 @@ $ KUBECONFIG=kube-config.yaml kubectl get pods --all-namespaces
    Install Azure CLI using the guide on the link https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
 
 4. **Login to Azure CLI**:
-   - Sign in with Azure CLI. In the example here we are logging-in by providing Azure Tenant ID, however you can choose different ways to login. Different methods of Azure cli login can be found here [Sign in with Azure CLI — Login and Authentication](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli):
+    - Sign in with Azure CLI. In the example here we are logging-in by providing Azure Tenant ID, however you can choose different ways to login. Different methods of Azure cli login can be found here [Sign in with Azure CLI — Login and Authentication](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli):
    ```
    az login --tenant <Tenant-ID>
    ```
@@ -106,21 +108,21 @@ $ KUBECONFIG=kube-config.yaml kubectl get pods --all-namespaces
    Please continue the login in the web browser. If no web browser is available or if the web browser fails to open, use device code flow 
    with `az login --use-device-code`.
    ```
-   - This command will automatically open your default browser and ask for the Microsoft Azure Credentials:
-     ![alt text](images/image26.png)
-   - Complete login via the web browser
+    - This command will automatically open your default browser and ask for the Microsoft Azure Credentials:
+      ![alt text](images/image26.png)
+    - Complete login via the web browser
 
 5. **Install KubeLogin**:
-   - Install the **KubeLogin** client (if required) to generate a token for authentication.
+    - Install the **KubeLogin** client (if required) to generate a token for authentication.
 
-     You may refer to instructions to install it on your terminal [here](https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize), based on the OS running on your terminal.
+      You may refer to instructions to install it on your terminal [here](https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize), based on the OS running on your terminal.
 
 
 6. **Authenticate and Use Kubectl**:
-   - Run any `kubectl` command (e.g.: `kubectl get ns`).
-   - You will be prompted to authenticate via a device code.
-   - Use a web browser to open https://microsoft.com/devicelogin and enter the code shown in the terminal.
-   - After authentication, you can use `kubectl` commands to manage your AKS cluster.
+    - Run any `kubectl` command (e.g.: `kubectl get ns`).
+    - You will be prompted to authenticate via a device code.
+    - Use a web browser to open https://microsoft.com/devicelogin and enter the code shown in the terminal.
+    - After authentication, you can use `kubectl` commands to manage your AKS cluster.
 
 **Step 3** : Execute the following command to create the credentials on your cluster. Use the credentials provided on the previous step.
 ```
@@ -142,7 +144,7 @@ With the credentials registered, we will now register the new ML Runtime accordi
 
 **Step 4** : In the Add Runtime window, enter the below url to use the customized Runtime Docker image
 ```
-registry.gitlab.com/leonardo.dias2/cml_tokenization_amp/amp_bm_securetoken_runtime:RC01 
+registry.gitlab.com/bluemetrix/securetoken/cml_tokenization_amp/amp_bm_securetoken_runtime:RC01 
 ```
 
 As ML Runtimes are identified based on certain attributes, metadata (such as Editor, Kernel, Edition, Version, and Maintenance Version) must be unique to add new Customized Runtimes to a deployment. Customized ML Runtimes must have different Edition text compared to Cloudera supported versions.
